@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     uta = Post.arel_table
     @posts = Post.where(uta[:author].matches(term)).order(:created_at).page(params[:page])
     # results = Post.where(uta[:author].matches(term)).order(:created_at)
-    # @posts = Kaminari::PaginatableArray.new(results, limit: 3).page(params[:page])
+    # @posts = Kaminari::PaginatableArray.new(results, limit: 5).page(params[:page])
     self.class.sync if query != "index"
   end
 
