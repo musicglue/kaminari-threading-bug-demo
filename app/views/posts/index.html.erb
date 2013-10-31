@@ -1,23 +1,15 @@
-<h1>Listing posts</h1>
+<h1>Kaminari threading bug exposer</h1>
 
-<table id="posts">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Body</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<p>Type into the input below, roughly after every second character, you should see a 500 error.</p>
 
-  <tbody class="page">
-    <%= render @posts %>
-  </tbody>
-</table>
+<input id="search"/>
 
-<%= paginate @posts %>
+<hr/>
+
+<div id="results">
+  <%= render partial: 'posts' %>
+</div>
+
 <br>
 
 <%= link_to 'New Post', new_post_path %>

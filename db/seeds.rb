@@ -8,7 +8,7 @@
 
 require 'securerandom'
 
-75.times do
+800.times do
   Post.create(
     :title => "My Post #{SecureRandom.hex(2)}",
     :author => SecureRandom.hex(6),

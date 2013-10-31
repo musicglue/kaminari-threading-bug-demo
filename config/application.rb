@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-module EndlessKaminari
+module KaminariThreadingBug
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -19,5 +19,7 @@ module EndlessKaminari
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.secret_token = 'fffd06fb823438ec6acdf76873b62c6ac1546eb8bd84c1050374094f9e3174e9fbb6dc43caed51'
   end
 end

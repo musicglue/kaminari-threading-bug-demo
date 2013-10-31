@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-EndlessKaminari::Application.load_tasks
+KaminariThreadingBug::Application.load_tasks

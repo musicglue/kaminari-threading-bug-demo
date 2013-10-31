@@ -1,10 +1,28 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  def self.sync
+    if queue.num_waiting == 0
+      queue.pop
+    else
+      queue.push :sema
+    end
+  end
+
+  def self.queue
+    @@q ||= Queue.new
+  end
+
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.order(:created_at).page(params[:page])
+    query = params.fetch("query", "index")
+    term = ?%.concat(term2).concat(?%)
+    uta = Post.arel_table
+    @posts = Post.where(uta[:author].matches(term)).order(:created_at).page(params[:page])
+    # results = Post.where(uta[:author].matches(term)).order(:created_at)
+    # @posts = Kaminari::PaginatableArray.new(results, limit: 3).page(params[:page])
+    self.class.sync if query != "index"
   end
 
   # GET /posts/1
@@ -62,6 +80,19 @@ class PostsController < ApplicationController
   end
 
   private
+
+    def tst
+      Time.now.to_f
+    end
+
+    def term2
+      (rand(240) + 16).to_s(16)
+    end
+
+    def running_thread_count
+      Thread.list.select {|thread| thread.status == "run"}.count
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])

@@ -1,4 +1,4 @@
-EndlessKaminari::Application.routes.draw do
+KaminariThreadingBug::Application.routes.draw do
   resources :posts
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -41,7 +41,7 @@ EndlessKaminari::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
