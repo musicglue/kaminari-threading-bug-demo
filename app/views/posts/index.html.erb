@@ -1,6 +1,11 @@
 <h1>Kaminari threading bug exposer</h1>
 
-<p>Type into the input below, roughly after every second character, you should see a 500 error.</p>
+<p>Type into the input below, roughly after every second character, you should see a 500 error in the javascript console.</p>
+<p>How it works: one request/thread will block on a Ruby Queue.pop, waiting for a second request to sync with.</p>
+<p>When the next request comes in it pushes to the Queue, this lets the first request/thread continue.</p>
+<p>Now the two threads are racing to render their results.</p>
+<p>More often than not, they both hit the paginate helper method at the same time and the bug is seen.</p>
+<p>Watch the network section in Chrome Developer Tools for pending requests, if you see one type another character</p>
 
 <input id="search"/>
 
